@@ -1,7 +1,8 @@
 from flask import Flask 
+from flask import render_template, flash, redirect, url_for
   
 app = Flask(__name__) 
   
 @app.route("/") 
 def home_view(): 
-        return "<h1>Welcome to the Work Zone</h1>"
+        return render_template('index.html')
