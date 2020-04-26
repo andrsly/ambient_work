@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="w3-main" style="margin-left:300px;margin-top:60px;">
+    <div class="w3-row-padding w3-margin-bottom"></div>
+    <div class="w3-row-padding w3-margin-bottom">
+        <div class="media-body>">
+        <h2 class="account-heading"><i class="fa fa-user"></i>  Hi, {{ current_user.username }}</h2>
+        <br>
+        <br>
+        <h5>Your current preferences</h5>
+        <p class="text-secondary"><strong>Temperature:</strong> {{ current_user.temp }} degrees celsius</p>
+        <p class="text-secondary"><strong>Screen brightness:</strong> {{ current_user.screen }}%</p>
+        <p class="text-secondary"><strong>Room brightness:</strong> {{ current_user.room }} lx</p>
+    </div>
+    <br>
+    <br>
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Update preferences</legend>
+                <div class="form-group">
+                    {{ form.temp.label(class="form-control-label") }}
+                    {% if form.temp.errors %}
+                        {{ form.temp(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.temp.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.temp(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.screen.label(class="form-control-label") }}
+                    {% if form.screen.errors %}
+                        {{ form.screen(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.screen.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.screen(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.room.label(class="form-control-label") }}
+                    {% if form.room.errors %}
+                        {{ form.room(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.room.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.room(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+
+
+        
+    
+</div>
+{% endblock content %}
