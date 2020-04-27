@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html>
-<title>WorkZone</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../static/css/register.css">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% extends "layout.html" %}
+{% block content %}
 
-<body class="w3-light-grey">
-
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-    {% for category, message in messages %}
-    <div class="alert alert-{{ category }}">
-        {{ message }}
-    </div>
-    {% endfor %}
-{% endif %}
-{% endwith %}
-
+<div class = "w3-row-padding w3-margin-bottom">
 <div class="content-section">
+    <br>
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
@@ -53,24 +34,20 @@
                     {{ form.password(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            <div class="form-check">
-                {{ form.remember(class="form-check-input") }}
-                {{ form.remember.label(class="form-check-label") }}
-            </div>
         </fieldset>
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
-        <small class="text-muted ml-2">
-            <a href="#">Forgot Password?</a>
-        </small>
     </form>
 </div>
+</div>
+<div class = "w3-row-padding w3-margin-bottom">
 <div class="border-top pt-3">
     <small class="text-muted">
         Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
     </small>
 </div>
+</div>
 
-</body>
-</html>
+{% endblock content %}
+
