@@ -1,18 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="w3-main" style="margin-left:300px;margin-top:60px;">
-    <div class="w3-row-padding w3-margin-bottom"></div>
+
     <div class="w3-row-padding w3-margin-bottom">
         <div class="media-body>">
-        <h2 class="account-heading"><i class="fa fa-user"></i>  Hi, {{ current_user.username }}</h2>
-        <br>
         <br>
         <h5>Your current preferences</h5>
         <p class="text-secondary"><strong>Temperature:</strong> {{ current_user.temp }} degrees celsius</p>
         <p class="text-secondary"><strong>Screen brightness:</strong> {{ current_user.screen }}%</p>
         <p class="text-secondary"><strong>Room brightness:</strong> {{ current_user.room }} lx</p>
     </div>
-    <br>
     <br>
     <div class="content-section">
         <form method="POST" action="">
@@ -67,5 +63,5 @@
 
         
     
-</div>
+
 {% endblock content %}

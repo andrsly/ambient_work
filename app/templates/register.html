@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html>
-<title>Register</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../static/css/register.css">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% extends "layout.html" %}
+{% block content %}
 
-<body class="w3-light-grey">
-
-    <div class="content-section">
+<div class = "w3-row-padding w3-margin-bottom">
+<div class="content-section">
+<br> 
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
+                <legend class="border-bottom mb-4">Sign up</legend>
                 <div class="form-group">
                     {{ form.username.label(class="form-control-label") }}
 
@@ -62,14 +53,15 @@
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
-    </div>
+</div>
+</div>
+<div class = "w3-row-padding w3-margin-bottom">
     <div class="border-top pt-3">
         <small class="text-muted">
             Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
         </small>
     </div>
+</div>
 
-</body>
-</html>
-
+    {% endblock content %}
 
