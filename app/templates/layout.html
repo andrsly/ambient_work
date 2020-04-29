@@ -117,43 +117,48 @@ mySidebar.style.display = "none";
 overlayBg.style.display = "none";
 }
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
+window.onload = getLocation();
+window.onload = getTodaysDate();
 
-var x = document.getElementById("demo");
-
-function showPosition(position) {
-    var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon="+ position.coords.longitude+"&appid=07a969fe12142afe0c9514ad65549627";
-    
-    $.getJSON(url, function(data) {
-        var temp = (data.main.temp-273.15).toFixed(2);;
-        var sunrise = new Date(data.sys.sunrise * 1000);
-        var sunset = new Date(data.sys.sunset * 1000);
-        var time = new Date(data.dt * 1000);
-        var text = `${temp} degrees celsius`                     
-        $(".otemp").html(text);
-    });
-
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude +
-  "<br>API: " + url;
-  
+function getTodaysDate() {
+  date = new Date().toLocaleDateString();
+  var x = document.getElementById("mydate");
+  x.innerHTML = date;
 }
 
 
+  function getLocation() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+      }
+
+  function showPosition(position) {
+      var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon="+ position.coords.longitude+"&appid=07a969fe12142afe0c9514ad65549627";
+      
+      $.getJSON(url, function(data) {
+          var temp = (data.main.temp-273.15).toFixed(1);;
+          var sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+          var sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+          var time = new Date(data.dt * 1000);
+          var text1 = `${temp} &#8451`
+          var text2 = `${data.name}`
+          var text3 = `${sunrise}`
+          var text4 = `${sunset}`                     
+          $(".myotemp").html(text1);
+          $(".myposition").html(text2);
+          $(".mysunrise").html(text3);
+          $(".mysunset").html(text4);
+      });
+    }
 </script>
 
 
-<!--<script>document.getElementById("temp01").innerHTML = "The outside temperature is "</script>-->
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
