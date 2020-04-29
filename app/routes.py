@@ -3,13 +3,10 @@ from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm, UpdateProfileForm
 from app.models import Users
 from flask_login import login_user, current_user, logout_user, login_required
-from app.weather import getWeatherData
 
 
 @app.route("/", methods=['GET']) 
 def home(): 
-        weather = getWeatherData()
-        outsidetemp = weather["temp"]
         return render_template('home.html')
 
 @app.route('/register/', methods=['GET', 'POST'])
@@ -63,6 +60,7 @@ def profile():
             form.temp.data = current_user.temp
             form.screen.data = current_user.screen
             form.room.data = current_user.room
+            form.hours.data = current_user.hours
         return render_template('profile.html', title="Profile", form=form)
 
 @app.route("/about/")

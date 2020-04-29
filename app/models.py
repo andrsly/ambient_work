@@ -14,6 +14,9 @@ class Users(db.Model, UserMixin):
     temp = db.Column(db.Float, nullable=False, default=22.5)
     screen = db.Column(db.Float, nullable=False, default=50.0)
     room = db.Column(db.Integer, nullable=False, default=500.0)
+    hours = db.Column(db.Float, nullable=False, default=7.5)
+    lat = db.Column(db.Float, nullable=True)
+    lon = db.Column(db.Float, nullable=True)
 
     def __repr__(self):
         return f"Users('{self.username})'"

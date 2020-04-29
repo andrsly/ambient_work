@@ -34,19 +34,24 @@
                     {{ form.password(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+            <div class="form-check" style="width: 130px;">
+                {{ form.remember.label(class="form-check-label") }}
+                {{ form.remember(class="form-check-input") }}
+            </div>
         </fieldset>
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
     </form>
 </div>
-</div>
 <div class = "w3-row-padding w3-margin-bottom">
-<div class="border-top pt-3">
+    <div class="border-top pt-3">
     <small class="text-muted">
-        Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
+        Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
     </small>
 </div>
+</div>
+
 </div>
 
 {% endblock content %}
