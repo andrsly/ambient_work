@@ -11,7 +11,6 @@
           </div>
           <div class="w3-clear"></div>
           <h4>Messages</h4>
-          <button onclick="getLocation()">Get coordinates</button>
         </div>
       </div>
       <div class="w3-quarter">
@@ -52,39 +51,39 @@
           <h5>Feeds</h5>
           <table class="w3-table w3-striped w3-white">
             <tr>
+                <td><i class="fa fa-calendar w3-text-teal w3-large"></i></td>
+                <td>Today's date</td>
+                <td><i><div id="mydate"></div></i></td>
+              </tr>
+            <tr>
                 <td><i class="fa fa-sliders w3-text-red w3-large"></i></td>
-                <td>The current screen brightness is </td>
-                <td><i>15 mins</i></td>
+                <td>Current screen brightness</td>
+                <td><i>TBA</i></td>
               </tr>
             <tr>
               <td><i class="fa fa-thermometer-3 w3-text-teal w3-large"></i></td>
-              <td>The current inside temperature is </td>
-              <td><i>10 mins</i></td>
+              <td>Current inside temperature</td>
+              <td><i>TBA</i></td>
             </tr>
             <tr>
               <td><i class="fa fa-thermometer-quarter w3-text-yellow w3-large"></i></td>
-              <td>The current outside temperature is </td>
-              <td><i id="otemp">temp</i></td>
+              <td>Current outside temperature</td>
+              <td><i><div class="myotemp"></div></i></td>
             </tr>
             <tr>
-              <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
-              <td>New comments.</td>
-              <td><i>25 mins</i></td>
+              <td><i class="fa fa-arrow-up w3-text-blue w3-large"></i></td>
+              <td>Today's local time of sunrise</td>
+              <td><i><div class="mysunrise"></div></i></td>
             </tr>
             <tr>
-              <td><i class="fa fa-bookmark w3-text-blue w3-large"></i></td>
-              <td>Check transactions.</td>
-              <td><i>28 mins</i></td>
+              <td><i class="fa fa-arrow-down w3-text-red w3-large"></i></td>
+              <td>Today's local time of sunset</td>
+              <td><i><div class="mysunset"></div></i></td>
             </tr>
             <tr>
-              <td><i class="fa fa-laptop w3-text-red w3-large"></i></td>
-              <td>CPU overload.</td>
-              <td><i>35 mins</i></td>
-            </tr>
-            <tr>
-              <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
-              <td>New shares.</td>
-              <td><i>39 mins</i></td>
+              <td><i class="fa fa-street-view w3-text-teal w3-large"></i></td>
+              <td>Current position</td>
+              <td><i><div class="myposition"></div></i></td>
             </tr>
           </table>
         </div>
@@ -144,7 +143,6 @@
     <hr>
   
     <div class="w3-container">
-        <div id="demo">Hei</div>
       <h5>Countries</h5>
       <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
         <tr>
@@ -198,6 +196,7 @@
           <p>Interests</p>
         </div>
       </div>
+
 
 {% endblock content %}
 
