@@ -22,9 +22,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
     <span class="w3-bar-item w3-right">
       {% if current_user.is_authenticated %}
-      <a class="nav-item nav-link" href="{{ url_for('logout') }}" style="color:white; font-size: 20px;">Logout</a>
+      <a class="nav-item nav-link" href="{{ url_for('logout') }}" style="color:white; font-size: 16px;"><b>Logout</b></a>
       {% else %}
-        <a class="nav-item nav-link" href="{{ url_for('login') }}" style="color:white; font-size: 20px;">Login</a>
+        <a class="nav-item nav-link" href="{{ url_for('login') }}" style="color:white; font-size: 16px;"><b>Login</b></a>
       {% endif %}
       </span>
   </div>
@@ -88,8 +88,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
  <!-- Footer -->
  <footer class="w3-container w3-padding-16 w3-light-grey">
-  <h6>FOOTER</h6>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
 
 <!-- End page content -->
@@ -118,7 +116,38 @@ function w3_close() {
 mySidebar.style.display = "none";
 overlayBg.style.display = "none";
 }
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+var x = document.getElementById("demo");
+
+function showPosition(position) {
+    var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon="+ position.coords.longitude+"&appid=07a969fe12142afe0c9514ad65549627";
+    
+    $.getJSON(url, function(data) {
+        var temp = (data.main.temp-273.15).toFixed(2);;
+        var sunrise = new Date(data.sys.sunrise * 1000);
+        var sunset = new Date(data.sys.sunset * 1000);
+        var time = new Date(data.dt * 1000);
+        var text = `${temp} degrees celsius`                     
+        $(".otemp").html(text);
+    });
+
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude +
+  "<br>API: " + url;
+  
+}
+
+
 </script>
+
 
 <!--<script>document.getElementById("temp01").innerHTML = "The outside temperature is "</script>-->
 

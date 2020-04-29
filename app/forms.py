@@ -27,6 +27,7 @@ class UpdateProfileForm(FlaskForm):
     temp = FloatField('Temperature', validators=[NumberRange(min=10.0, max=30.0)])
     screen = FloatField('Screen brightness', validators=[NumberRange(min=0.0, max=100.0)])
     room = FloatField('Room brightness', validators=[NumberRange(min=100, max=1000)])
+    hours = FloatField('Work hours', validators=[NumberRange(min=0.0, max=23.5)])   
     submit = SubmitField('Update')
 
 
