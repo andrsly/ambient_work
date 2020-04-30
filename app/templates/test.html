@@ -1,53 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Data from weather API</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
 </head>
 
-<body>
-    <div class="mypanel"></div>
+<body onload="startTime()">
 
-<button onclick="getLocation()">Get coordinates</button>
+<div id="txt"></div>
 
-<p id="demo"></p>
-
-    <script>
-var x = document.getElementById("demo");
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-
-function showPosition(position) {
-    var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon="+ position.coords.longitude+"&appid=07a969fe12142afe0c9514ad65549627";
-    
-    $.getJSON(url, function(data) {
-        var temp = (data.main.temp-273.15).toFixed(2);;
-        var sunrise = new Date(data.sys.sunrise * 1000);
-        var sunset = new Date(data.sys.sunset * 1000);
-        var time = new Date(data.dt * 1000);
-        var text = `Data registered at: ${time}<br>
-                    City: ${data.name}<br>
-                    Temperature: ${temp} degrees celsius<br>
-                    Sunrise: ${sunrise}<br>
-                    Sunset: ${sunset}`                     
-        $(".mypanel").html(text);
-        $(".myposition").html(text);
-    });
-
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude +
-  "<br>API: " + url;
-  
-}
-     
-    </script>
-    
 </body>
 </html>
 
