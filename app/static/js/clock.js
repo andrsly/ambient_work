@@ -21,11 +21,9 @@
     setInterval(function() {
       var compareDate = current_user_logintime;
       var currentTime = new Date()
-      var diff = Math.abs(currentTime - new Date(compareDate.replace(/-/g,'/')));
-      var diffDate = new Date(diff);
-      var h = diffDate.getUTCHours();
-      var m = diffDate.getUTCMinutes();
-      var s = diffDate.getUTCSeconds();
+      var h = Math.abs(currentTime.getUTCHours() - new Date(compareDate.replace(/-/g,'/')).getHours());
+      var m = Math.abs(currentTime.getUTCMinutes() - new Date(compareDate.replace(/-/g,'/')).getMinutes());
+      var s = Math.abs(currentTime.getUTCSeconds() - new Date(compareDate.replace(/-/g,'/')).getSeconds());
       if ((h + m/60 + s/3600)>=current_user_hours) {
         var ex = document.getElementById('myexceeded');
         ex.innerText = "You have exceeded your preferred session duration";
