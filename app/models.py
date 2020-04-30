@@ -15,6 +15,7 @@ class Users(db.Model, UserMixin):
     screen = db.Column(db.Float, nullable=False, default=50.0)
     room = db.Column(db.Integer, nullable=False, default=500.0)
     hours = db.Column(db.Float, nullable=False, default=7.5)
+    login_time = db.Column(db.DateTime, nullable=True)
 
     def __repr__(self):
         return f"Users('{self.username})'"

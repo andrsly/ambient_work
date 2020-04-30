@@ -3,6 +3,7 @@ from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm, UpdateProfileForm
 from app.models import Users
 from flask_login import login_user, current_user, logout_user, login_required
+import datetime
 
 
 @app.route("/", methods=['GET']) 
@@ -35,6 +36,9 @@ def login():
         if user and bcrypt.check_password_hash(user.pswd, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
+            # Add login time to database
+            user.login_time = datetime.datetime.now()
+            db.session.commit()
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login unsuccessful. Please check username and password', 'danger')
@@ -53,6 +57,7 @@ def profile():
             current_user.temp = form.temp.data
             current_user.screen = form.screen.data
             current_user.room = form.room.data
+            current_user.hours = form.hours.data
             db.session.commit()
             flash('Your preferences has been updated!', 'success')
             return redirect(url_for('profile'))
@@ -71,3 +76,7 @@ def about():
 @login_required
 def todolist():
     return render_template('todo.html')
+
+@app.route("/test/")
+def test():
+    return render_template('test.html')
