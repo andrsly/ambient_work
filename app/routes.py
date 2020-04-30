@@ -37,7 +37,7 @@ def login():
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             # Add login time to database
-            user.login_time = datetime.datetime.now()
+            user.login_time = datetime.datetime.utcnow()
             db.session.commit()
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
