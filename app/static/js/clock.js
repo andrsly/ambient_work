@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(){
         warned=true;
       }
       var mod = (((h*60)+m+(s/60))%(parseInt(current_user_work) + parseInt(current_user_pause)));
-      if((mod>=0.0) && (mod<0.04) && pause){
+      if((mod>=0.0) && (mod<0.02) && pause){
         playBell();
         workpause.innerText = "Work this out!";
         var pTO = setTimeout(function(){
