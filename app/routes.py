@@ -58,6 +58,8 @@ def profile():
             current_user.screen = form.screen.data
             current_user.room = form.room.data
             current_user.hours = form.hours.data
+            current_user.work_minutes = form.work_minutes.data
+            current_user.pause_minutes = form.pause_minutes.data
             db.session.commit()
             flash('Your preferences has been updated!', 'success')
             return redirect(url_for('profile'))
@@ -66,6 +68,8 @@ def profile():
             form.screen.data = current_user.screen
             form.room.data = current_user.room
             form.hours.data = current_user.hours
+            form.work_minutes.data = current_user.work_minutes
+            form.pause_minutes.data = current_user.pause_minutes
         return render_template('profile.html', title="Profile", form=form)
 
 @app.route("/about/")
