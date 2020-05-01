@@ -5,10 +5,12 @@
         <div class="media-body>">
         <br>
         <h5>Your current preferences</h5>
-        <p class="text-secondary"><strong>Temperature:</strong> {{ current_user.temp }} degrees celsius</p>
+        <p class="text-secondary"><strong>Temperature:</strong> {{ current_user.temp }} &#8451</p>
         <p class="text-secondary"><strong>Screen brightness:</strong> {{ current_user.screen }}%</p>
         <p class="text-secondary"><strong>Room brightness:</strong> {{ current_user.room }} lx</p>
         <p class="text-secondary"><strong>Number of work hours:</strong> {{ current_user.hours }} h</p>
+        <p class="text-secondary"><strong>Duration of work interval:</strong> {{ current_user.work_minutes }} min</p>
+        <p class="text-secondary"><strong>Duration of break:</strong> {{ current_user.pause_minutes }} min</p>
     </div>
     <br>
     <div class="content-section">
@@ -66,6 +68,32 @@
                         </div>
                     {% else %}
                         {{ form.hours(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.work_minutes.label(class="form-control-label") }}
+                    {% if form.work_minutes.errors %}
+                        {{ form.work_minutes(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.work_minutes.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.work_minutes(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.pause_minutes.label(class="form-control-label") }}
+                    {% if form.pause_minutes.errors %}
+                        {{ form.pause_minutes(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.pause_minutes.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.pause_minutes(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
             </fieldset>

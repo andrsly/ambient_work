@@ -129,6 +129,16 @@ function getTodaysDate() {
   x.innerHTML = date;
 }
 
+function playAirhorn() {
+  var audio = new Audio('../static/Air Horn-SoundBible.com-964603082.mp3');
+  audio.play();
+}
+
+function playBell() {
+  var audio = new Audio('../static/Japanese Temple Bell Small-SoundBible.com-113624364.mp3');
+  audio.play();
+}
+
   jQuery.htmlPrefilter = function( html ) {
     return html;
   };
@@ -165,6 +175,8 @@ function getTodaysDate() {
 <script type="text/javascript">
   var current_user_logintime = "{{ current_user.login_time }}";
   var current_user_hours = "{{ current_user.hours }}";
+  var current_user_work = "{{ current_user.work_minutes }}";
+  var current_user_pause = "{{ current_user.pause_minutes }}";
 </script>
 
 

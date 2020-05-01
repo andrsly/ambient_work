@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import Form, BooleanField, SubmitField, PasswordField, StringField, FloatField, validators
+from wtforms import Form, BooleanField, SubmitField, PasswordField, StringField, FloatField, IntegerField, validators
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length, NumberRange
 from app.models import Users
 
@@ -24,10 +24,12 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign in')
 
 class UpdateProfileForm(FlaskForm):
-    temp = FloatField('Temperature', validators=[NumberRange(min=10.0, max=30.0)])
-    screen = FloatField('Screen brightness', validators=[NumberRange(min=0.0, max=100.0)])
-    room = FloatField('Room brightness', validators=[NumberRange(min=100, max=1000)])
-    hours = FloatField('Work hours', validators=[NumberRange(min=0.0, max=23.5)])   
+    temp = FloatField('Temperature [C]', validators=[NumberRange(min=10.0, max=30.0)])
+    screen = FloatField('Screen brightness [%]', validators=[NumberRange(min=0.0, max=100.0)])
+    room = IntegerField('Room brightness [lx]', validators=[NumberRange(min=100, max=1000)])
+    hours = FloatField('Work hours [h]', validators=[NumberRange(min=0.0, max=23.5)])
+    work_minutes = IntegerField('Duration of work interval [min]', validators=[NumberRange(min=1, max=120)])
+    pause_minutes = IntegerField('Duration of break [min]', validators=[NumberRange(min=1, max=60)]) 
     submit = SubmitField('Update')
 
 
