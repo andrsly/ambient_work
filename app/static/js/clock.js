@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
       clock.innerText = clockTime;
     },500);
 
-    // Exceeded preferred duration of total worksession
+    // Exceeded preferred duration of total work session
     var warned = false;
     var pause = true;
     var workpause = document.getElementById('myworkpause');
@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function(){
         var ex = document.getElementById('myexceeded');
         ex.innerText = "You have exceeded your preferred session duration";
         workpause.innerText = "This session is over. No more notifications for breaks will be given";
-        clearTimeout(pTO);
         pause = false;
       }
       if((h + m/60 + s/3600)>=current_user_hours && !warned){
@@ -43,13 +42,14 @@ document.addEventListener("DOMContentLoaded", function(){
         warned=true;
       }
       var mod = (((h*60)+m+(s/60))%(parseInt(current_user_work) + parseInt(current_user_pause)));
-      if((mod>=0.0) && (mod<0.02) && pause){
-        playBell();
+      if((mod>=0.0) && (mod<parseInt(current_user_work)) && pause){
+        if (mod<0.02) { playBell(); }
         workpause.innerText = "Work this out!";
-        var pTO = setTimeout(function(){
-                    playBell();
-                    workpause.innerText = "Time for a break!" ;
-                  }, current_user_work*60*1000);
+      }
+      if ((mod>=parseInt(current_user_work)) && pause) {
+        workpause.innerText = "Time for a break!";
+        if (mod<(parseInt(current_user_work)+0.02)) { playBell(); }
+        
       }
       if (s < 10) {
           s = "0" + s;
