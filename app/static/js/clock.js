@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function(){
       var s = Math.floor((((diff-h)*60)-m)*60);
       if ((h + m/60 + s/3600)>=current_user_hours) {
         var ex = document.getElementById('myexceeded');
-        ex.innerText = "You have exceeded your preferred session duration";
-        workpause.innerText = "This session is over. No more notifications for breaks will be given";
+        ex.innerText = "You have exceeded your preferred session duration!";
+        workpause.innerText = "No more notifications for breaks will be given, due to exceeded limit!";
         pause = false;
       }
       if((h + m/60 + s/3600)>=current_user_hours && !warned){
@@ -44,10 +44,10 @@ document.addEventListener("DOMContentLoaded", function(){
       var mod = (((h*60)+m+(s/60))%(parseInt(current_user_work) + parseInt(current_user_pause)));
       if((mod>=0.0) && (mod<parseInt(current_user_work)) && pause){
         if (mod<0.02) { playBell(); }
-        workpause.innerText = "Work this out!";
+        workpause.innerText = "Work till the next break!";
       }
       if ((mod>=parseInt(current_user_work)) && pause) {
-        workpause.innerText = "Time for a break!";
+        workpause.innerText = "It is time for a break!";
         if (mod<(parseInt(current_user_work)+0.02)) { playBell(); }
         
       }

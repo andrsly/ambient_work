@@ -32,5 +32,13 @@ class UpdateProfileForm(FlaskForm):
     pause_minutes = IntegerField('Duration of break [min]', validators=[NumberRange(min=1, max=60)]) 
     submit = SubmitField('Update')
 
+class DrinkForm(FlaskForm):
+    liquids = FloatField('Drink', validators=[NumberRange(min=0.0, max=10.0)])
+    submit1 = SubmitField('Drink [liters]')
+
+class EatForm(FlaskForm):
+    food = IntegerField('Eat', validators=[NumberRange(min=0, max=5)])
+    submit2 = SubmitField('Eat [meals]')
+
 
 

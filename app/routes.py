@@ -1,14 +1,29 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db, bcrypt
-from app.forms import RegistrationForm, LoginForm, UpdateProfileForm
+from app.forms import RegistrationForm, LoginForm, UpdateProfileForm, DrinkForm, EatForm
 from app.models import Users
 from flask_login import login_user, current_user, logout_user, login_required
 import datetime
 
 
-@app.route("/", methods=['GET']) 
+@app.route("/", methods=['GET', 'POST']) 
 def home(): 
-        return render_template('home.html')
+    dform = DrinkForm()
+    eform = EatForm()
+    if eform.validate_on_submit():
+            current_user.food =  current_user.food + eform.food.data
+            db.session.commit()
+            flash('Your food intake have been registered!', 'success')
+            return redirect(url_for('home'))
+    elif dform.validate_on_submit():
+            current_user.liquids = current_user.liquids + dform.liquids.data
+            db.session.commit() 
+            flash('Your liquid intake has been registered!', 'success')
+            return redirect(url_for('home'))
+    elif request.method == 'GET':
+        dform.liquids.data = 0.2
+        eform.food.data = 1
+    return render_template('home.html', title='Home', dform=dform, eform=eform)
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -38,6 +53,8 @@ def login():
             next_page = request.args.get('next')
             # Add login time to database
             user.login_time = datetime.datetime.utcnow()
+            user.liquids = 0.0
+            user.food = 0
             db.session.commit()
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
@@ -82,5 +99,9 @@ def todolist():
     return render_template('todo.html')
 
 @app.route("/test/")
+@login_required
 def test():
     return render_template('test.html')
+
+
+    
