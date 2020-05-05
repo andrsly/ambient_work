@@ -166,6 +166,19 @@ function playBell() {
           $(".myposition").html(text2);
           $(".mysunrise").html(text3);
           $(".mysunset").html(text4);
+          
+          //Temperature regulations
+          var current_user_temp = parseFloat("{{ current_user.temp }}");
+          var text = ``;
+          var temp_diff = (Math.abs(current_user_temp-temp)).toFixed(1);
+          if (temp < current_user_temp) {
+            text = `Turn the heat up <small>(with ${temp_diff} &#8451)</small>`;
+          } else if (temp > current_user_temp) {
+            text = `Turn the heat down <small>(with ${temp_diff} &#8451)</small>`;
+          } else if (temp == current_user_temp){
+            text = `Ideal`;
+          }
+          $(".myintemp").html(text);
       });
     }
 
@@ -176,6 +189,8 @@ function playBell() {
   var current_user_hours = "{{ current_user.hours }}";
   var current_user_work = "{{ current_user.work_minutes }}";
   var current_user_pause = "{{ current_user.pause_minutes }}";
+
+  //Round liquids to one decimal
   var liquids = "{{ current_user.liquids }}";
   var current_user_liquids = parseFloat(liquids).toFixed(1);
   document.getElementById("myliquids").innerHTML = current_user_liquids;
