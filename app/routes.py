@@ -13,12 +13,10 @@ def home():
     if eform.validate_on_submit():
             current_user.food =  current_user.food + eform.food.data
             db.session.commit()
-            flash('Your food intake have been registered!', 'success')
             return redirect(url_for('home'))
     elif dform.validate_on_submit():
             current_user.liquids = current_user.liquids + dform.liquids.data
             db.session.commit() 
-            flash('Your liquid intake has been registered!', 'success')
             return redirect(url_for('home'))
     elif request.method == 'GET':
         dform.liquids.data = 0.2
