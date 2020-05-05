@@ -8,7 +8,7 @@
           <div class="w3-clear"></div>
           <h4>
             {% if current_user.is_authenticated %}
-            <div id="myexceeded">Keep on working!</div>
+            <div id="myexceeded">Have a good session</div>
             {% else %}
             Login to start session
             {% endif %} 
@@ -28,22 +28,56 @@
         </div>
       </div>
       <div class="w3-quarter">
-        <div class="w3-container w3-teal w3-padding-16">
-          <div class="w3-clear"></div>
-          <h4>Shares</h4>
+        <div class="w3-container w3-green w3-padding-16">
+          <div class="w3-clear">
+            {% if current_user.is_authenticated %}
+            <form method="POST" action="">
+                {{ dform.hidden_tag() }}
+                        {% if dform.liquids.errors %}
+                            {{ dform.liquids(class="form-control form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in dform.liquids.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ dform.liquids(class="form-control form-control col-sm-4") }}
+                        {% endif %}
+                        {{ dform.submit1(class="btn btn-outline-dark col-sm-8") }}
+            </form>
+            {% else %}
+            <h4>Login to start session</h4>
+            {% endif %}
+        </div>
         </div>
       </div>
       <div class="w3-quarter">
         <div class="w3-container w3-orange w3-text-white w3-padding-16">
-          <div class="w3-clear"></div>
-          <h4>Users</h4>
+          <div class="w3-clear">
+          {% if current_user.is_authenticated %}
+            <form method="POST" action="">
+                {{ eform.hidden_tag() }}
+                        {% if eform.food.errors %}
+                            {{ eform.food(class="form-control form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in eform.food.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ eform.food(class="form-control form-control col-sm-3") }}
+                        {% endif %}
+                        {{ eform.submit2(class="btn btn-outline-dark col-sm-9") }}
+            </form>
+            {% else %}
+            <h4>Login to start session</h4>
+            {% endif %}
         </div>
-      </div>
     </div>
-  
+  </div>
     <div class="w3-panel">
-      <div class="w3-row-padding">
-        <div class="w3-twothird w3-margin-bottom">
+      <div class="w3-row-padding" style="padding-top: 20px;" >
+        <div class="w3-twothird w3-margin-bottom" >
           <h5>Feeds</h5>
           <table class="w3-table w3-striped w3-white">
             <tr>
@@ -126,21 +160,51 @@
     </div>
     <hr>
     <div class="w3-container">
-      <h5>General Stats</h5>
-      <p>New Visitors</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
-      </div>
-  
-      <p>New Users</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
-      </div>
-  
-      <p>Bounce Rate</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
-      </div>
+        <h5>Reminders</h5>
+        <ul class="w3-ul w3-card-4 w3-white">
+          <li class="w3-padding-16">
+            <i class="w3-left w3-margin-right fa fa-glass fa-2x fa-pull-left" style="width:35px"></i>
+            <span class="w3-large">Recommended daily intake of liquids is 2 liter. {% if current_user.is_authenticated %}During this session, you have drunk <b id="myliquids"></b> liters. {%endif%}</span><br>
+            <div class="w3-grey" style="width:95%; margin-left: 4%;">
+            {% if current_user.is_authenticated %}
+                {% if (current_user.liquids>=2) %}
+                <div class="w3-container w3-center w3-padding w3-green" style="width:100%"></div>
+                {% elif (current_user.liquids>=1.75) %}
+                <div class="w3-container w3-center w3-padding w3-green" style="width:87%"></div>
+                {% elif (current_user.liquids>=1.5) %}
+                <div class="w3-container w3-center w3-padding w3-green" style="width:75%"></div>
+                {% elif (current_user.liquids>=1.25) %}
+                <div class="w3-container w3-center w3-padding w3-green" style="width:62%"></div>
+                {% elif (current_user.liquids>=1) %}
+                <div class="w3-container w3-center w3-padding w3-green" style="width:50%;"></div>
+                {% elif (current_user.liquids>=0.75) %}
+                <div class="w3-container w3-center w3-padding w3-green" style="width:37%"></div>
+                {% elif (current_user.liquids>=0.5) %}
+                <div class="w3-container w3-center w3-padding w3-green" style="width:25%"></div>
+                {% elif (current_user.liquids>=0.25) %}
+                <div class="w3-container w3-center w3-padding w3-green" style="width:12%"></div>
+                {% else %}
+                <div class="w3-container w3-center w3-padding" style="width: 0%;"></div>
+                {% endif %} 
+            {% endif %}
+              </div>
+          </li>
+          <li class="w3-padding-16">
+            <i class="w3-left w3-circle w3-margin-right fa fa-cutlery fa-2x fa-pull-left" style="width:35px"></i>
+            <span class="w3-large">Food gives us energy, and helps us stay concentrated. {% if current_user.is_authenticated %}During this session, you have eaten <b>{{ current_user.food }}</b> times. {%endif%}</span><br>
+            <div class="w3-grey" style="width:95%; margin-left: 4%;">
+            {% if current_user.is_authenticated %}
+                {% if (current_user.food>=2) %}
+                <div class="w3-container w3-center w3-padding w3-orange" style="width:100%"></div>
+                {% elif (current_user.food>=1) %}
+                <div class="w3-container w3-center w3-padding w3-orange" style="width:50%;"></div>
+                {% else %}
+                <div class="w3-container w3-center w3-padding" style="width:0%"></div>
+                {% endif %} 
+            {% endif %}
+              </div>
+          </li>
+        </ul>
     </div>
     <hr>
   
@@ -198,6 +262,9 @@
           <p>Interests</p>
         </div>
       </div>
+      </div>
+</div>
+
 
 
 {% endblock content %}

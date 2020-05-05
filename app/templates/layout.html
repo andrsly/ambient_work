@@ -2,7 +2,7 @@
 <title>WorkZone</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../static/css/w3schools.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../static/css/todo.css">
@@ -94,8 +94,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- End page content -->
 </div>
-<script src="../static/js/clock.js"></script>
-<script src="../static/js/login_session.js.js"></script>
+<script src="../static/js/clock.js"></script> 
 <script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
@@ -177,6 +176,9 @@ function playBell() {
   var current_user_hours = "{{ current_user.hours }}";
   var current_user_work = "{{ current_user.work_minutes }}";
   var current_user_pause = "{{ current_user.pause_minutes }}";
+  var liquids = "{{ current_user.liquids }}";
+  var current_user_liquids = parseFloat(liquids).toFixed(1);
+  document.getElementById("myliquids").innerHTML = current_user_liquids;
 </script>
 
 

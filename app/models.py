@@ -18,6 +18,8 @@ class Users(db.Model, UserMixin):
     login_time = db.Column(db.DateTime, nullable=True)
     work_minutes = db.Column(db.Integer, nullable=False, default=45)
     pause_minutes = db.Column(db.Integer, nullable=False, default=15)
+    liquids = db.Column(db.Float, nullable=False, default=0.0)
+    food = db.Column(db.Integer, nullable=False, default=0)
 
     def __repr__(self):
         return f"Users('{self.username})'"
