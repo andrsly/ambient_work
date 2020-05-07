@@ -50,7 +50,7 @@ def login():
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             # Add login time to database
-            user.login_time = datetime.datetime.utcnow()
+            user.login_time = datetime.datetime.utcnow() + datetime.timedelta(minutes=5)
             user.liquids = 0.0
             user.food = 0
             db.session.commit()
