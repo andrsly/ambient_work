@@ -26,11 +26,13 @@ document.addEventListener("DOMContentLoaded", function(){
     setInterval(function() {
       var compareDate = current_user_logintime;
       var currentTime = new Date()
-      var diff = Math.abs((currentTime.getUTCHours() + currentTime.getUTCMinutes()/60 + currentTime.getUTCSeconds()/3600)
-               - (new Date(compareDate.replace(/-/g,'/')).getHours() + new Date(compareDate.replace(/-/g,'/')).getMinutes()/60 + new Date(compareDate.replace(/-/g,'/')).getSeconds()/3600));
+      var prediff = (currentTime.getUTCHours() + currentTime.getUTCMinutes()/60 + currentTime.getUTCSeconds()/3600)
+               - (new Date(compareDate.replace(/-/g,'/')).getHours() + new Date(compareDate.replace(/-/g,'/')).getMinutes()/60 + new Date(compareDate.replace(/-/g,'/')).getSeconds()/3600);
+      var diff = Math.abs(prediff);
       var h = Math.floor(diff);
       var m = Math.floor((diff-h)*60);
       var s = Math.floor((((diff-h)*60)-m)*60);
+
       if ((h + m/60 + s/3600)>=current_user_hours) {
         var ex = document.getElementById('myexceeded');
         ex.innerText = "You have exceeded your preferred session duration!";
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function(){
         warned=true;
       }
       var mod = (((h*60)+m+(s/60))%(parseInt(current_user_work) + parseInt(current_user_pause)));
-      if((mod>=0.0) && (mod<parseInt(current_user_work)) && pause){
+      if((mod>=0.0) && (mod<parseInt(current_user_work)) && pause && prediff>0){
         if (mod<0.02) { playBell(); }
         workpause.innerText = "Work till the next break!";
       }
@@ -63,5 +65,13 @@ document.addEventListener("DOMContentLoaded", function(){
       var diffTime = h +":"+ m +":"+ s;
       var timer = document.getElementById('mytimer');
       timer.innerText = diffTime;
+
+      var dur = document.getElementById("mydur");
+      if (prediff<0){
+        workpause.innerText = "Session will begin soon";
+        dur.innerText = "Time until session begins"
+      } else {
+        dur.innerText = "Durration of current session"
+      }
     },500);
     });
