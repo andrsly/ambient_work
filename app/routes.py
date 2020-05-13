@@ -97,9 +97,10 @@ def todolist():
     return render_template('todo.html')
 
 @app.route("/test/")
-@login_required
 def test():
-    return render_template('test.html')
+    return render_template('test.html') 
 
 
-    
+@app.route("/google9d705ef30c351d02.html/")
+def googleauth():
+    return render_template('google9d705ef30c351d02.html')
