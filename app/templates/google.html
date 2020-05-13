@@ -119,30 +119,38 @@
                 if (!when) {
                   when = event.start.date;
                 }
-                appendPre(event.summary + ' (' + when + ')')
-              }
-            } else {
-              appendPre('No upcoming events found.');
-            }
-    
-          });
+            
+          appendPre(event.summary, when);
         }
-    
-        /**
-         * Append a pre element to the body containing the given message
-         * as its text node.
-         *
-         * @param {string} message Text to be placed in pre element.
-         */
-        function appendPre(message) {
-          var node = document.createElement("TR");
-          var node2 = document.createElement("TD");
-          var pre = document.getElementById('output');
-          var textContent = document.createTextNode(message);
-          node2.appendChild(textContent);
-          node.appendChild(node2);
-          pre.appendChild(node);
-        }
+      } else {
+        appendPre('No upcoming events found.');
+      }
+
+    });
+  }
+  //Append a pre element to the body containing the given message as its text node.
+  function appendPre(message, when) {
+    var timedate = when.split("T");
+    var date = timedate[0];
+    var time = timedate[1];
+    if (time) {
+        time = time.split("+")[0];
+    } else {
+        time = "All Day";
+    }
+    var node = document.createElement("TR");
+    var node1 = document.createElement("TD");
+    var node2 = document.createElement("TD");
+    var pre = document.getElementById('output');
+    var textContent1 = document.createTextNode(message);
+    var textContent2 = document.createTextNode(date + ' - ' + time);
+    node1.appendChild(textContent1);
+    node2.appendChild(textContent2);
+    node.appendChild(node1);
+    node.appendChild(node2);
+    pre.appendChild(node);
+  }
+</script>
     
       </script>
       <script src="https://apis.google.com/js/client.js?onload=checkAuth">
