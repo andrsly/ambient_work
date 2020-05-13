@@ -277,18 +277,16 @@ function playBell() {
    */
   function listUpcomingEvents() {
     var request = gapi.client.calendar.events.list({
-      'calendarId': 'primary', /* Can be 'primary' or a given calendarid */
+      'calendarId': 'primary',
       'timeMin': (new Date()).toISOString(),
       'showDeleted': false,
       'singleEvents': true,
-      'maxResults': 10,
+      'maxResults': 6,
       'orderBy': 'startTime'
     });
 
     request.execute(function(resp) {
       var events = resp.items;
-      appendPre('Upcoming events:');
-
       if (events.length > 0) {
         for (i = 0; i < events.length; i++) {
           var event = events[i];
