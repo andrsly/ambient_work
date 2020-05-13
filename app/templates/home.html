@@ -208,7 +208,7 @@
     </div>
     <hr>
   
-    <div class="w3-container">
+    <div class="w3-container w3-half">
       <h5>Regulations</h5>
       <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white w3-card">
         <tr>
@@ -237,6 +237,23 @@
         </tr>
       </table><br>
     </div>
+    <div class="w3-container w3-half">
+      <h5>Upcoming events</h5>
+      <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white w3-card">
+        <div id="authorize-div" style="display: none">
+        <span>Authorize access to Google Calendar API</span>
+        <!--Button for the user to click to initiate auth sequence -->
+        <button id="authorize-button" onclick="handleAuthClick(event)">
+          Authorize
+        </button>
+      </div>
+      <pre id="output"></pre>
+      
+      <br>
+    </table>
+    </div>
+      
+      
 </div>
 
 
