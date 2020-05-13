@@ -136,9 +136,11 @@
          */
         function appendPre(message) {
           var node = document.createElement("TR");
+          var node2 = document.createElement("TD");
           var pre = document.getElementById('output');
           var textContent = document.createTextNode(message);
-          node.appendChild(textContent);
+          node2.appendChild(textContent);
+          node.appendChild(node2);
           pre.appendChild(node);
         }
     
